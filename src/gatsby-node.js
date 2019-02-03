@@ -13,6 +13,13 @@ const REASON_TEST = /\.(ml|re)$/
 const isCompiledFile = fileName => BS_TEST.test(fileName)
 const isReasonFile = fileName => REASON_TEST.test(fileName)
 
+export const onCreateBabelConfig = ({ actions }, options) => {
+  actions.setBabelPreset({
+    name: `@babel/plugin-bucklescript`,
+    options,
+  })
+}
+
 export const onCreateWebpackConfig = ({ actions }) => {
   const { setWebpackConfig } = actions
   setWebpackConfig({
