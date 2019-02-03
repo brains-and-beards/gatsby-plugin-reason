@@ -15,7 +15,7 @@ const isReasonFile = fileName => REASON_TEST.test(fileName)
 
 export const onCreateBabelConfig = ({ actions }, options) => {
   actions.setBabelPreset({
-    name: `@babel/plugin-bucklescript`,
+    name: `babel-plugin-bucklescript`,
     options,
   })
 }
