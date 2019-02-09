@@ -13,19 +13,19 @@ const REASON_TEST = /\.(ml|re)$/
 const isCompiledFile = fileName => BS_TEST.test(fileName)
 const isReasonFile = fileName => REASON_TEST.test(fileName)
 
-export const onCreateWebpackConfig = ({ actions }) => {
-  const { setWebpackConfig } = actions
-  setWebpackConfig({
-    module: {
-      rules: [
-        {
-          test: REASON_TEST,
-          use: [`bs-loader`],
-        },
-      ],
-    },
-  })
-}
+// export const onCreateWebpackConfig = ({ actions }) => {
+//   const { setWebpackConfig } = actions
+//   setWebpackConfig({
+//     module: {
+//       rules: [
+//         {
+//           test: REASON_TEST,
+//           use: [`bs-loader`],
+//         },
+//       ],
+//     },
+//   })
+// }
 
 const jsFilePath = (buildDir, moduleDir, resourcePath, inSource, bsSuffix) => {
   const mlFileName = resourcePath.replace(buildDir, '')
@@ -38,25 +38,25 @@ const jsFilePath = (buildDir, moduleDir, resourcePath, inSource, bsSuffix) => {
   return path.join(buildDir, 'lib', moduleDir, jsFileName)
 }
 
-export const preprocessSource = async ({ filename }) => {
-  if (!isReasonFile(filename)) {
-    return null
-  }
-  const moduleDir = 'js'
-  const compiledFilePath = jsFilePath(
-    process.cwd(),
-    moduleDir,
-    filename,
-    false,
-    '.bs.js'
-  )
-  try {
-    await compileFile(moduleDir, compiledFilePath)
-  } catch (e) {
-    // Don't need to print error message since bsb will already do that
-    process.exit(1)
-  }
-}
+// export const preprocessSource = async ({ filename }) => {
+//   if (!isReasonFile(filename)) {
+//     return null
+//   }
+//   const moduleDir = 'js'
+//   const compiledFilePath = jsFilePath(
+//     process.cwd(),
+//     moduleDir,
+//     filename,
+//     false,
+//     '.bs.js'
+//   )
+//   try {
+//     await compileFile(moduleDir, compiledFilePath)
+//   } catch (e) {
+//     // Don't need to print error message since bsb will already do that
+//     process.exit(1)
+//   }
+// }
 
 export const resolvableExtensions = () => ['.ml', '.re']
 
